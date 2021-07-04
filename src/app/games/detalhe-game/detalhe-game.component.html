@@ -1,0 +1,19 @@
+<div class="bg-white border" *ngIf="game$ | async as game">
+  <div class="row">
+    <div class="col-lg-8">
+      <app-game [url]="game.url" [descricao]="game.description"></app-game>
+    </div>
+    <div class="col-lg-4">
+      <small>
+        <p class="text-left break-word">{{ game.description }}</p>
+        <i (click)="curtir()" class="fa fa-heart-i fa-2x mr-2 pull-left"> {{ game.likes }} </i>
+        <i class="fa fa-comment-o fa-2x mr-2 ml-2"> {{ game.comments }} </i>
+        <i (click)="excluir()" class="fa fa-trash-o fa-2x pull-right"></i>
+      </small>
+      <app-comentarios [id]="game.id" *ngIf="game.allowComments; else warning"></app-comentarios>
+      <ng-template #warning>
+        <p>Usuário não pode comentar</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
